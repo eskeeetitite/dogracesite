@@ -8,7 +8,7 @@
 
 // Connectie met database zoals jullie gewend zijn...
 $dbHost = "localhost";
-$dbName = "login-example";
+$dbName = "login-system";
 $dbUser = "root";
 $dbPass = "";
 
@@ -30,7 +30,6 @@ try {
             Voordat je deze voorbeeld applicatie kunt gebruiken zul je een aantal dingen moeten doen:
             <ol>    
                 <li>Mysql server starten</li>
-                <li>Database aanmaken genaamd 'login-example'</li>
                 <li>Tabel daarin aanmaken met de benodigde velden</li>
             </ol>
             

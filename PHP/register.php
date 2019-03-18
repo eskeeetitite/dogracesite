@@ -22,7 +22,7 @@
         <input type="password" name="password_confirm" id="password_confirm">
     </div>
 
-    <input type="submit" value="Register">
+    <input type="submit" value="Register" name="register-submit">
 </form>
 
 <?php require 'footer.php'; ?>
