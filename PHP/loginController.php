@@ -7,6 +7,20 @@ require 'config.php';
  *
  */
 
+function pwdCheckUpper($string) {
+    if(preg_match("/[A-Z]/", $string)===0) {
+        return true;
+    }
+    return false;
+}
+
+
+function pwdCheckSpecial($string) {
+    if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $string)=== 0) {
+        return true;
+    }
+    return false;
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' ) {
     header('location: index.php');
@@ -34,6 +48,15 @@ if ($_POST['type'] === 'register') {
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
     $emailcheck = filter_var($email, FILTER_VALIDATE_EMAIL);
+    if (pwdCheckUpper($password) == true && pwdCheckSpecial($password) == false){
+        header('location: register.php?charcheck=0');
+        exit;
+    }
+    if (strlen($password) < 7)
+    {
+        header('location: register.php?pwdlength=0');
+        exit;
+    }
     if ($password_confirm != $password){
         header('location: register.php?pwdmatch=0');
         exit;
@@ -42,6 +65,7 @@ if ($_POST['type'] === 'register') {
         header('location: register.php?verifyemail=0');
         exit;
     }
+    $cleanpwd = trim($password);
     $hashedpwd = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users(email, password) VALUES( :email, :password)";
     $prepare = $db->prepare($sql);
@@ -64,6 +88,7 @@ if ($_POST['type'] === 'register') {
      *
      *
      */
+    session_start();
     header('location: index.php?success=1');
     exit;
 }
