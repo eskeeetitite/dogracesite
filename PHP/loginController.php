@@ -1,18 +1,20 @@
 <?php
-
+require 'config.php';
 /*
  * Dit is een webserver only script, waar je alleen mag komen als je via een form
  * data verstuurd, en niet als je via de url hier naar toe komt. Iedereen die dat doet
  * sturen we terug naar index.php
  *
  */
+
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' ) {
     header('location: index.php');
     exit;
 }
 
 if ( $_POST['type'] === 'login' ) {
-    var_dump($_POST);
+
     /*
      * Hier komen we als we de login form data versturen.
      * things to do:
@@ -28,6 +30,25 @@ if ( $_POST['type'] === 'login' ) {
 }
 
 if ($_POST['type'] === 'register') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password_confirm = $_POST['password_confirm'];
+    $emailcheck = filter_var($email, FILTER_VALIDATE_EMAIL);
+    if ($password_confirm != $password){
+        header('location: register.php?pwdmatch=0');
+        exit;
+    }
+    if($emailcheck == false){
+        header('location: register.php?verifyemail=0');
+        exit;
+    }
+    $hashedpwd = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO users(email, password) VALUES( :email, :password)";
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':email'     => $email,
+        ':password'  => $hashedpwd
+    ]);
     var_dump($_POST);
     /*
      * Hier komen we als we de register form data versturen
@@ -43,7 +64,7 @@ if ($_POST['type'] === 'register') {
      *
      *
      */
-
+    header('location: index.php?success=1');
     exit;
 }
 
