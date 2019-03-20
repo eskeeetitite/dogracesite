@@ -22,6 +22,15 @@ function pwdCheckSpecial($string) {
     return false;
 }
 
+function emailcheck($db, $email) {
+    $sql = "SELECT * FROM users WHERE email=:email";
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':email'     => $email
+    ]);
+    return  (bool)$prepare->fetchColumn();
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' ) {
     header('location: index.php');
     exit;
@@ -40,6 +49,7 @@ if ( $_POST['type'] === 'login' ) {
      * wachtwoord niet in orde is.
      *
      */
+    sesion_start();
     exit;
 }
 
@@ -48,23 +58,25 @@ if ($_POST['type'] === 'register') {
     $password = $_POST['password'];
     $password_confirm = $_POST['password_confirm'];
     $emailcheck = filter_var($email, FILTER_VALIDATE_EMAIL);
+
     if (pwdCheckUpper($password) == true && pwdCheckSpecial($password) == false){
         header('location: register.php?charcheck=0');
         exit;
-    }
-    if (strlen($password) < 7)
+    } else if (strlen($password) < 7)
     {
         header('location: register.php?pwdlength=0');
         exit;
-    }
-    if ($password_confirm != $password){
+    } else if ($password_confirm != $password){
         header('location: register.php?pwdmatch=0');
         exit;
-    }
-    if($emailcheck == false){
+    } else if($emailcheck == false){
         header('location: register.php?verifyemail=0');
         exit;
+    } else if (emailcheck($db, $email)) {
+        header('location: register.php?emailexists=1');
+        exit;
     }
+
     $cleanpwd = trim($password);
     $hashedpwd = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO users(email, password) VALUES( :email, :password)";
@@ -73,7 +85,8 @@ if ($_POST['type'] === 'register') {
         ':email'     => $email,
         ':password'  => $hashedpwd
     ]);
-    var_dump($_POST);
+
+
     /*
      * Hier komen we als we de register form data versturen
      * things to do:
@@ -88,7 +101,6 @@ if ($_POST['type'] === 'register') {
      *
      *
      */
-    session_start();
     header('location: index.php?success=1');
     exit;
 }
