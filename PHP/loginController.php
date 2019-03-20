@@ -7,6 +7,7 @@ require 'config.php';
  *
  */
 
+
 function pwdCheckUpper($string) {
     if(preg_match("/[A-Z]/", $string)===0) {
         return true;
@@ -37,11 +38,35 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' ) {
 }
 
 if ( $_POST['type'] === 'login' ) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE email=:email";
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':email'     => $email
+    ]);
+    $result = $prepare->fetch();
+
+
+
+
+    if(password_verify($password,$result['password'])){
+        session_start();
+        $_SESSION['id'] = $result['id'];
+
+    }
+    else{
+
+
+
+    }
 
     /*
      * Hier komen we als we de login form data versturen.
      * things to do:
      * 1. Checken of gebruikersnaam EN email in de database bestaat met de ingevoerde data
+     *
      * 2. Indien ja, een $_SESSION['id'] vullen met de id van de persoon die probeert in te loggen.
      * 3. gebruiker doorsturen naar de admin pagina
      *
@@ -49,7 +74,8 @@ if ( $_POST['type'] === 'login' ) {
      * wachtwoord niet in orde is.
      *
      */
-    sesion_start();
+
+    session_start();
     exit;
 }
 

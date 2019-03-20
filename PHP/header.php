@@ -1,5 +1,13 @@
 <?php
     require 'config.php';
+    function logout() {
+
+        session_start();
+        $_SESSION['id']  = null;
+        session_unset();
+        session_destroy();
+
+    }
 ?>
 
 <!-- Even heel easy html code, omdat de focus nu op het inlogsysteem ligt en niet op fancy looks :)  -->
@@ -27,7 +35,7 @@
          *
          */
         if ( isset($_SESSION['id']) ) {
-            echo "You are currently logged in. Want to <a href='register.php'>logout?</a>";
+            echo "<form action=''>You are currently logged in. Want to <input href='index.php'>logout?</input></form>";
         } else {
             echo "<a href='login.php'>Login</a> &nbsp; or &nbsp; <a href='register.php'> register </a>";
         }
