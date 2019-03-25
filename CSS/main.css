@@ -67,6 +67,9 @@ header{
     padding-top: 30px;
     text-align: left;
 }
+.tos{
+    grid-column: 2;
+}
 footer{
     bottom: 0;
 }
