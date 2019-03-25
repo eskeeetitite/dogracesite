@@ -26,7 +26,9 @@
 
                 <input type="submit" value="Register" name="register-submit">
 
-</div>
+    <div class="form-group">
+        <label for="accept_TOS">Ik ga akkoord met de <a href="termsofservice.php">algemene voorwaarden</a></label>
+        <input type="checkbox" name="accept_TOS" id="accept_TOS">
     </div>
 
     </form>
