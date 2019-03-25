@@ -11,17 +11,24 @@
  * als het inloggen in de logincontroller goed is gegaan, neem maar even een kijkje daar.
  * Is dat niet zo, dan helaasch, mag je niet deze site bekijken!
  */
+require 'header.php';
+
 if (!isset($_SESSION['id'])) {
     die("I'm sorry, this page is for logged in AMO students only.");
 }
+else {
+    echo '<h1>Welcome to AMO Login system Admin Page </h1>';
+echo '<p>Still nothing special to see here but thats not the point.</p>';
+echo '<p>you can only get here while being logged in. Try to close your browser and youll that you are still logged in!</p>';
 
-require 'header.php';
+echo '<a href="#">Download</a>';
+}
+
+
 
 ?>
 
-<h1>Welcome to AMO Login system Admin Page </h1>
-<p>Still nothing special to see here but that's not the point.</p>
-<p>you can only get here while being logged in. Try to close your browser and you'll that you are still logged in!</p>
+
 
 
 <?php require 'footer.php'; ?>

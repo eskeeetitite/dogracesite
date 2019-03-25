@@ -33,7 +33,12 @@ function emailcheck($db, $email) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' ) {
-    header('location: index.php');
+    header('location: index.php?error=wrongpage');
+    exit;
+}
+if ($_POST['type'] === 'logout'){
+    session_destroy();
+    header('location: index.php?success=logout');
     exit;
 }
 
@@ -52,7 +57,6 @@ if ( $_POST['type'] === 'login' ) {
 
 
     if(password_verify($password,$result['password'])){
-        session_start();
         $_SESSION['id'] = $result['id'];
 
     }
@@ -61,6 +65,7 @@ if ( $_POST['type'] === 'login' ) {
 
 
     }
+    header('location: index.php?success=login');
 
     /*
      * Hier komen we als we de login form data versturen.
@@ -74,8 +79,6 @@ if ( $_POST['type'] === 'login' ) {
      * wachtwoord niet in orde is.
      *
      */
-
-    session_start();
     exit;
 }
 
@@ -86,20 +89,25 @@ if ($_POST['type'] === 'register') {
     $emailcheck = filter_var($email, FILTER_VALIDATE_EMAIL);
 
     if (pwdCheckUpper($password) == true && pwdCheckSpecial($password) == false){
-        header('location: register.php?charcheck=0');
+        header('location: register.php?error=charcheck');
         exit;
     } else if (strlen($password) < 7)
     {
-        header('location: register.php?pwdlength=0');
+        header('location: register.php?error=pwdlength');
         exit;
     } else if ($password_confirm != $password){
-        header('location: register.php?pwdmatch=0');
+        header('location: register.php?error=pwdmatch');
+
         exit;
     } else if($emailcheck == false){
-        header('location: register.php?verifyemail=0');
+        header('location: register.php?error=invalidmail');
         exit;
     } else if (emailcheck($db, $email)) {
-        header('location: register.php?emailexists=1');
+        header('location: register.php?error=emailexists');
+        exit;
+    }
+    if(!$_POST['accept_TOS']) {
+        header('location: register.php?error=tos');
         exit;
     }
 
@@ -127,7 +135,7 @@ if ($_POST['type'] === 'register') {
      *
      *
      */
-    header('location: index.php?success=1');
+    header('location: index.php?success=register');
     exit;
 }
 
