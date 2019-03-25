@@ -1,8 +1,27 @@
 <?php require 'header.php'; ?>
+<div class="container">
+    <div class="index_welcome">
+        <h1>Welcome to the Dogracegame website!</h1>
 
-   <h1>Welcome to AMO Login system Home Page! </h1>
-   <p>Nothing special to see here but that's not the point.</p>
-   <p>Try going to the ultra secret ultimate vip <a href='admin.php'> admin </a> page without logging in first</p>
-    <a href="register.php">Register</a>
+    </div>
+    <div class="index_informational">
+        <p>buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+            buy our game because we good lorem ipsum dolor sit amet
+
+        </p>
+        <p>Please <a href='register.php'>Register</a> or
+            <a href='login.php'>Login</a> before downloading</p>
+    </div>
+
+</div>
+
 
 <?php require 'footer.php'; ?>

@@ -1,5 +1,7 @@
 <?php require 'header.php'; ?>
 
+<div class="form">
+    <div class="form1">
 <form action="logincontroller.php" method="post">
     <input type="hidden" name="type" value="login">
     <div class="form-group">
@@ -14,5 +16,6 @@
 
     <input type="submit" value="login">
 </form>
-
+    </div>
+</div>
 <?php require 'footer.php'; ?>

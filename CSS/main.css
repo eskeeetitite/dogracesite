@@ -1,0 +1,73 @@
+/*general styles/misc*/
+body{
+    margin: 0px;
+    padding: 0px;
+}
+h1,h2,h3,h4,h5{
+    font-family: 'Montserrat', sans-serif;
+}
+p,a,input,label{
+    font-family: 'Nunito', sans-serif;
+}
+.copyright{
+    text-align: center;
+    background-color: #373F51;
+    color: white;
+    margin-top: 25%;
+
+}
+.copyright p{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
+.container{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+/*header-style*/
+header{
+    background-color: #5792D1;
+}
+.logo{
+    text-align: center;
+    grid-column: 1;
+}
+.logo img{
+    max-width: 40px;
+    height: auto;
+}
+.nav{
+    position: relative;
+    text-align: center;
+    grid-column: 3;
+    top: 25%;
+}
+
+.index_welcome{
+    padding-top: 20%;
+    text-align: center;
+    grid-column:2;
+}
+.index_informational{
+    text-align: center;
+    grid-column: 2;
+}
+.form{
+    grid-column: 2;
+    margin-top: 10%;
+    text-align: center;
+}
+.form1{
+    display: inline-block;
+    background-color: #5792D1;
+    margin-top: 30px;
+    padding-left: 90px;
+    padding-right: 90px;
+    padding-top: 30px;
+    text-align: left;
+}
+footer{
+    bottom: 0;
+}
+
