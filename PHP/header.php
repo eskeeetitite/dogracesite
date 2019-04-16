@@ -21,9 +21,9 @@
         <nav class="nav">
             <?php
             if ( isset($_SESSION['id']) ) {
-                echo "<p>You are currently logged in. Want to <input href='index.php'>logout?</input></p>";
+                echo "<form action='loginController.php' method='post'><input type='hidden' name='type' value='logout'>You are currently logged in. Want to <input class='logout' href='index.php' type='submit' value='Logout'></form>";
             } else {
-                echo "<a href='login.php'>Login</a> &nbsp; or &nbsp; <a href='register.php'> register </a>";
+                echo "<a class='login_register' href='login.php'>Login</a> &nbsp;  Or &nbsp; <a class='login_register' href='register.php'> register </a>";
             }
             ?>
         </nav>

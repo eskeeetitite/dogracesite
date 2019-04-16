@@ -25,6 +25,14 @@ p,a,input,label{
     display: grid;
     grid-template-columns: 20% 60% 20%;
 }
+.container-index-body{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+.message{
+    text-align: center;
+    color: red;
+}
 /*header-style*/
 header{
     background-color: #5792D1;
@@ -43,7 +51,7 @@ header{
     grid-column: 3;
     top: 25%;
 }
-
+/*index-body*/
 .index_welcome{
     padding-top: 20%;
     text-align: center;
@@ -70,7 +78,63 @@ header{
 .tos{
     grid-column: 2;
 }
+.download{
+
+    padding: 10px 20% 10px 20%;
+    background-color: #5792D1;
+    color: white;
+    text-decoration: none;
+    font-size: large;
+    border-radius: 50px;
+}
+.download:hover{
+    background-color: #373F51;
+}
+.download_ifelse{
+    margin-top: 20%;
+}
+.login_register{
+    color: white;
+    padding: 3px;
+}
+.login_register:hover{
+    background-color: #373F51;
+}
+.logout{
+     text-decoration: none;
+     background-color: #5792D1;
+     border: none;
+     margin: 0px;
+     color: white;
+ }
+.logout:hover {
+    background-color: #373F51;
+}
+/*footer*/
 footer{
     bottom: 0;
 }
-
+/*responsiveness*/
+@media only screen and (max-width: 600px) {
+    .container-index-body{
+        display: grid;
+        grid-template-columns: 10% 80% 10%;
+    }
+    .login_register{
+        color: white;
+        padding: 3px;
+        font-size: 50px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .container-index-body{
+        display: grid;
+        grid-template-columns: 100%;
+    }
+    .index_welcome{
+        grid-column: 1;
+    }
+    .index_informational{
+        grid-column: 1;
+    }
+}
